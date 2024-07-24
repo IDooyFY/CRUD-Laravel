@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nis')->unique();
             $table->string('nama');
-            $table->enum('kelas', ['Kelas 10', 'Kelas 11', 'Kelas 12']);
+            $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
             $table->string('jurusan');
             $table->timestamps();
         });

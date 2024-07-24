@@ -91,7 +91,7 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action="create" method="POST" enctype="multipart/form-data">
+                                            <form action="create.kelas" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="mb-3">
                                                     <label for="exampleInputKelas" class="form-label">Pilih
@@ -124,7 +124,7 @@
                         </span>
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
-                                <input type="number" class="form-control me-2" name="" id="" style="width: 100px;">
+                                Jumlah Kelas : {{ $kelas->count() ?? '' }}
                                 <form class="d-flex" role="search">
                                     <input class="form-control me-2" type="search" placeholder="Search"
                                         aria-label="Search">

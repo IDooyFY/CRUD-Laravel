@@ -24,6 +24,8 @@ Route::get('kelas',[KelasController::class,'index'])->name('kelas.index');
 
 Route::get('siswa',[SiswaController::class,'index'])->name('siswa.index');
 
-Route::post('create',[KelasController::class,'create'])->name('create');
+Route::post('create.kelas',[KelasController::class,'create'])->name('create');
 
 Route::post('create',[SiswaController::class,'create'])->name('create');
+
+Route::get('edit/{id}',[SiswaController::class,'edit'])->name('edit');

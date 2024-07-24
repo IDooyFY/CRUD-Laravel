@@ -9,5 +9,12 @@ class Kelas extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['kelas', 'jurusan'];
+
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class);
+    }
 }
+
+

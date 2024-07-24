@@ -176,9 +176,9 @@
                                         <td>
                                             <button type="button" class="btn btn-sm btn-success rounded shadow-sm">Lihat
                                                 Data</button>
-                                            <button type="button"
+                                            <a href="edit/{{ $row->id }}" type="button"
                                                 class="btn btn-sm btn-warning rounded ms-2 shadow-sm">Edit
-                                                Data</button>
+                                                Data</a>
                                             <button type="button"
                                                 class="btn btn-sm btn-danger rounded ms-2 shadow-sm">Hapus
                                                 data</button>
@@ -188,6 +188,54 @@
 
                                 </tbody>
                             </table>
+
+                            <!-- Modal Edit -->
+                            <div class="modal fade bd-example-modal-lg" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-md">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Murid</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="create" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="row">
+                                                    <!-- Kolom pertama -->
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputNis">NIS:</label>
+                                                        <input type="number" class="form-control" name="nis" placeholder="NIS kamu">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputNama">Nama:</label>
+                                                        <input type="text" class="form-control" name="nama" placeholder="Nama kamu">
+                                                    </div>
+                                                    <!-- Kolom kedua -->
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputKelas" class="form-label">Pilih kelas:</label>
+                                                        <select class="form-select" id="exampleInputKelas" name="kelas" aria-label="Default select example">
+                                                            <option selected>Pilih kelas</option>
+                                                            <option value="Kelas 10">Kelas 10</option>
+                                                            <option value="Kelas 11">Kelas 11</option>
+                                                            <option value="Kelas 12">Kelas 12</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputJurusan">Jurusan:</label>
+                                                        <input type="text" class="form-control" name="jurusan" placeholder="Masukkan jurusan">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- End Modal --}}
                         </div>
                     </div>
 
