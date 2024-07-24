@@ -34,7 +34,7 @@
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="{{ route('kelas.index') }}" class="nav-link link-success border border-2 border-success rounded-4"
+                        <a href="{{ route('kelas.index') }}" class="nav-link link-dark border border-dark rounded-4"
                             style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); padding-left: 70px">
                             <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="#home"></use>
@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('siswa.index') }}" class="nav-link link-dark border border-dark mt-3 rounded-4"
+                        <a href="{{ route('siswa.index') }}" class="nav-link link-success border border-2 border-success mt-3 rounded-4"
                             style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); padding-left: 70px">
                             <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="#speedometer2"></use>
@@ -67,7 +67,7 @@
             <div class="col ms-sm-auto">
                 <nav class="navbar bg-body-tertiary border border-2 rounded-1">
                     <div class="container-fluid">
-                        <span class="navbar-brand mb-0 h1">Kelas</span>
+                        <span class="navbar-brand mb-0 h1">Murid</span>
                         <a href="#" class="d-flex btn btn-danger"
                             style="box-shadow: 0 2px 4px 0 rgba(255, 0, 0, 0.2);">logout</a>
                     </div>
@@ -75,44 +75,49 @@
                 <div class="content p-3">
                     <div class="card">
                         <span class="card-header d-flex">
-                            Daftar Kelas
+                            Daftar Murid
                             <button type="button" class="btn btn-outline-dark ms-auto" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal"
-                                style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);">Tambah Kelas</button>
+                                style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);">Tambah Murid</button>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
+                            <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-md">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Kelas</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                            <h5 class="modal-title" id="exampleModalLabel">Tambah Murid</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form action="create" method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                <div class="mb-3">
-                                                    <label for="exampleInputKelas" class="form-label">Pilih
-                                                        kelas:</label>
-                                                    <select class="form-select" id="exampleInputKelas" name="kelas"
-                                                        aria-label="Default select example">
-                                                        <option selected>Pilih kelas</option>
-                                                        <option value="Kelas 10">Kelas 10</option>
-                                                        <option value="Kelas 11">Kelas 11</option>
-                                                        <option value="Kelas 12">Kelas 12</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label for="exampleInputJurusan" class="form-label">Jurusan:</label>
-                                                    <input type="text" name="jurusan" class="form-control"
-                                                        id="exampleInputJurusan">
+                                                <div class="row">
+                                                    <!-- Kolom pertama -->
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputNis">NIS:</label>
+                                                        <input type="number" class="form-control" name="nis" placeholder="NIS kamu">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputNama">Nama:</label>
+                                                        <input type="text" class="form-control" name="nama" placeholder="Nama kamu">
+                                                    </div>
+                                                    <!-- Kolom kedua -->
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputKelas" class="form-label">Pilih kelas:</label>
+                                                        <select class="form-select" id="exampleInputKelas" name="kelas" aria-label="Default select example">
+                                                            <option selected>Pilih kelas</option>
+                                                            <option value="Kelas 10">Kelas 10</option>
+                                                            <option value="Kelas 11">Kelas 11</option>
+                                                            <option value="Kelas 12">Kelas 12</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputJurusan">Jurusan:</label>
+                                                        <input type="text" class="form-control" name="jurusan" placeholder="Masukkan jurusan">
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                 </div>
                                             </form>
@@ -120,11 +125,12 @@
                                     </div>
                                 </div>
                             </div>
+
                             {{-- End Modal --}}
                         </span>
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
-                                <input type="number" class="form-control me-2" name="" id="" style="width: 100px;">
+                                Jumlah Murid : {{ $siswa->count() ?? '' }}
                                 <form class="d-flex" role="search">
                                     <input class="form-control me-2" type="search" placeholder="Search"
                                         aria-label="Search">
@@ -148,6 +154,8 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>NIS</th>
+                                        <th>Nama</th>
                                         <th>Kelas</th>
                                         <th>Jurusan</th>
                                         <th>Aksi</th>
@@ -158,9 +166,11 @@
                                     @php
                                         $no = 1;
                                     @endphp
-                                    @foreach ($kelas as $row)
+                                    @foreach ($siswa as $row)
                                     <tr>
                                         <td>{{ $no++ }}</td>
+                                        <td>{{ $row->nis }}</td>
+                                        <td>{{ $row->nama }}</td>
                                         <td>{{ $row->kelas }}</td>
                                         <td>{{ $row->jurusan }}</td>
                                         <td>
@@ -180,6 +190,7 @@
                             </table>
                         </div>
                     </div>
+
                 </div>
             </div>
 

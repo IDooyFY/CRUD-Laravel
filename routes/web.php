@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,8 @@ Route::get('/', function () {
 
 Route::get('kelas',[KelasController::class,'index'])->name('kelas.index');
 
+Route::get('siswa',[SiswaController::class,'index'])->name('siswa.index');
+
 Route::post('create',[KelasController::class,'create'])->name('create');
+
+Route::post('create',[SiswaController::class,'create'])->name('create');
