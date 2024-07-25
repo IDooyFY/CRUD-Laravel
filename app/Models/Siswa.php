@@ -8,12 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Siswa extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['nis', 'nama', 'kelas_id', 'jurusan', 'no_telepon', 'alamat'];
+    protected $fillable = ['nis', 'nama', 'kelas_id', 'no_telepon'];
 
     public function kelas()
     {
         return $this->belongsTo(Kelas::class);
     }
 };
-

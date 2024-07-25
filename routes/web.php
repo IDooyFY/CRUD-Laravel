@@ -28,4 +28,4 @@ Route::post('create.kelas',[KelasController::class,'create'])->name('create');
 
 Route::post('create',[SiswaController::class,'create'])->name('create');
 
-Route::get('edit/{id}',[SiswaController::class,'edit'])->name('edit');
+Route::get('siswa/edit/{id}',[SiswaController::class,'edit'])->name('edit');
