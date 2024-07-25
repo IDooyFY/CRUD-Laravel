@@ -87,7 +87,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed"  href="#">
+        <a class="nav-link collapsed"  href="mapel">
             <i class="bi bi-journal-text"></i><span>Mata Pelajaran</span>
         </a>
       </li>

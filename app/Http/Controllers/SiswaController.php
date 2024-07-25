@@ -49,7 +49,7 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        $siswa = Siswa::find($id);
+        //
     }
 
     /**
@@ -57,14 +57,29 @@ class SiswaController extends Controller
      */
     public function update(Request $request, Siswa $siswa)
     {
-        //
+        // Validasi data input
+        $validatedData = $request->validate([
+            'nis' => 'required|numeric',
+            'nama' => 'required|string|max:255',
+            'no_telepon' => 'required|numeric',
+            'kelas_id' => 'required|exists:kelas,id',
+        ]);
+
+        // Perbarui data siswa
+        $siswa->update($validatedData);
+
+        // Redirect atau respon sesuai kebutuhan
+        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diperbarui.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Siswa $siswa)
+    public function destroy($id)
     {
-        //
+        $siswa = Siswa::findOrFail($id);
+        $siswa->delete();
+
+        return redirect()->route('siswa.index')->with('success', 'Siswa berhasil dihapus');
     }
 }
