@@ -150,6 +150,7 @@
                                         <th>No</th>
                                         <th>Kelas</th>
                                         <th>Jurusan</th>
+                                        <th>Jumlah Murid</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -163,6 +164,7 @@
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $row->kelas }}</td>
                                         <td>{{ $row->jurusan }}</td>
+                                        <td>{{ $row->siswa->count() }}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-success rounded shadow-sm">Lihat
                                                 Data</button>

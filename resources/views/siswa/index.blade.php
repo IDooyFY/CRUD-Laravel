@@ -43,7 +43,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('siswa.index') }}" class="nav-link link-success border border-2 border-success mt-3 rounded-4"
+                        <a href="{{ route('siswa.index') }}"
+                            class="nav-link link-success border border-2 border-success mt-3 rounded-4"
                             style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); padding-left: 70px">
                             <svg class="bi me-2" width="16" height="16">
                                 <use xlink:href="#speedometer2"></use>
@@ -81,12 +82,16 @@
                                 style="box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);">Tambah Murid</button>
 
                             <!-- Modal -->
-                            <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+                            <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-md">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Tambah Murid</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form action="create" method="POST" enctype="multipart/form-data">
@@ -95,29 +100,37 @@
                                                     <!-- Kolom pertama -->
                                                     <div class="mb-3">
                                                         <label for="exampleInputNis">NIS:</label>
-                                                        <input type="number" class="form-control" name="nis" placeholder="NIS kamu">
+                                                        <input type="number" class="form-control" name="nis"
+                                                            placeholder="NIS kamu">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputNama">Nama:</label>
-                                                        <input type="text" class="form-control" name="nama" placeholder="Nama kamu">
+                                                        <input type="text" class="form-control" name="nama"
+                                                            placeholder="Nama kamu">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputNama">No Telepon:</label>
+                                                        <input type="number" class="form-control" name="no_telepon"
+                                                            placeholder="No Telepon kamu">
                                                     </div>
                                                     <!-- Kolom kedua -->
+
                                                     <div class="mb-3">
-                                                        <label for="exampleInputKelas" class="form-label">Pilih kelas:</label>
-                                                        <select class="form-select" id="exampleInputKelas" name="kelas" aria-label="Default select example">
+                                                        <label for="exampleInputKelas" class="form-label">Pilih
+                                                            kelas:</label>
+                                                        <select class="form-select" id="exampleInputKelas"
+                                                            name="kelas_id" aria-label="Default select example">
                                                             <option selected>Pilih kelas</option>
-                                                            <option value="Kelas 10">Kelas 10</option>
-                                                            <option value="Kelas 11">Kelas 11</option>
-                                                            <option value="Kelas 12">Kelas 12</option>
+                                                            @foreach ($kelas as $kls)
+                                                            <option value="{{ $kls->id }}">{{ $kls->kelas }} {{
+                                                                $kls->jurusan }}</option>
+                                                            @endforeach
                                                         </select>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputJurusan">Jurusan:</label>
-                                                        <input type="text" class="form-control" name="jurusan" placeholder="Masukkan jurusan">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                 </div>
                                             </form>
@@ -125,6 +138,7 @@
                                     </div>
                                 </div>
                             </div>
+
 
                             {{-- End Modal --}}
                         </span>
@@ -139,9 +153,9 @@
                             </div>
                             @if($errors->any())
                             <div class="alert alert-danger mt-2">
-                                    @foreach($errors->all() as $error)
-                                    {{ $error }}
-                                    @endforeach
+                                @foreach($errors->all() as $error)
+                                {{ $error }}
+                                @endforeach
                             </div>
                             @endif
 
@@ -156,23 +170,23 @@
                                         <th>No</th>
                                         <th>NIS</th>
                                         <th>Nama</th>
+                                        <th>No Telepon</th>
                                         <th>Kelas</th>
-                                        <th>Jurusan</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     @php
-                                        $no = 1;
+                                    $no = 1;
                                     @endphp
                                     @foreach ($siswa as $row)
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $row->nis }}</td>
                                         <td>{{ $row->nama }}</td>
-                                        <td>{{ $row->kelas }}</td>
-                                        <td>{{ $row->jurusan }}</td>
+                                        <td>{{ $row->no_telepon }}</td>
+                                        <td>{{ $row->kelas->kelas }}</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-success rounded shadow-sm">Lihat
                                                 Data</button>
@@ -190,12 +204,14 @@
                             </table>
 
                             <!-- Modal Edit -->
-                            <div class="modal fade bd-example-modal-lg" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade bd-example-modal-lg" id="exampleModalEdit" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-md">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">Edit Murid</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form action="create" method="POST" enctype="multipart/form-data">
@@ -204,16 +220,20 @@
                                                     <!-- Kolom pertama -->
                                                     <div class="mb-3">
                                                         <label for="exampleInputNis">NIS:</label>
-                                                        <input type="number" class="form-control" name="nis" placeholder="NIS kamu">
+                                                        <input type="number" class="form-control" name="nis"
+                                                            placeholder="NIS kamu">
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputNama">Nama:</label>
-                                                        <input type="text" class="form-control" name="nama" placeholder="Nama kamu">
+                                                        <input type="text" class="form-control" name="nama"
+                                                            placeholder="Nama kamu">
                                                     </div>
                                                     <!-- Kolom kedua -->
                                                     <div class="mb-3">
-                                                        <label for="exampleInputKelas" class="form-label">Pilih kelas:</label>
-                                                        <select class="form-select" id="exampleInputKelas" name="kelas" aria-label="Default select example">
+                                                        <label for="exampleInputKelas" class="form-label">Pilih
+                                                            kelas:</label>
+                                                        <select class="form-select" id="exampleInputKelas" name="kelas"
+                                                            aria-label="Default select example">
                                                             <option selected>Pilih kelas</option>
                                                             <option value="Kelas 10">Kelas 10</option>
                                                             <option value="Kelas 11">Kelas 11</option>
@@ -222,11 +242,13 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputJurusan">Jurusan:</label>
-                                                        <input type="text" class="form-control" name="jurusan" placeholder="Masukkan jurusan">
+                                                        <input type="text" class="form-control" name="jurusan"
+                                                            placeholder="Masukkan jurusan">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
                                                     <button type="submit" class="btn btn-primary">Submit</button>
                                                 </div>
                                             </form>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Kelas;
 
 class SiswaController extends Controller
 {
@@ -14,7 +15,8 @@ class SiswaController extends Controller
     public function index()
     {
         $siswa = Siswa::all();
-        return view('siswa.index', compact('siswa'));
+        $kelas = Kelas::all();
+        return view('siswa.index', compact('siswa', 'kelas'));
     }
 
     /**
