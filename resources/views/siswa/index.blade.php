@@ -219,6 +219,14 @@
                                         </div>
                                         {{-- End Modal --}}
 
+                                        <div class="row g-3 align-items-center mt-2">
+                                            <div class="col-auto">
+                                                <form action="{{ route('siswa.index') }}" method="GET">
+                                                    <input type="search" name="search" id="searchInput" class="form-control mx-sm-3" placeholder="Search">
+                                                </form>
+                                            </div>
+                                        </div>
+
                                         <table class="table table-hover mt-3 border text-center"
                                             style="font-family: 'Nunito', sans-serif;">
                                             <thead>
@@ -345,10 +353,10 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>SMKN6 Balikpapan</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Designed by <a href="https://bootstrapmade.com/">Ridhoo</a>
         </div>
     </footer><!-- End Footer -->
 
@@ -392,6 +400,7 @@
                 });
             });
     </script>
+
 </body>
 
 </html>

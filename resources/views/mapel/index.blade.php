@@ -32,7 +32,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center">
-                <span class="d-none d-lg-block"><i class="bi bi-menu-button-wide-fill"></i> Menu kelas</span>
+                <span class="d-none d-lg-block"><i class="bi bi-menu-button-wide-fill"></i> Menu mapel</span>
             </a>
         </div><!-- End Logo -->
     </header><!-- End Header -->
@@ -145,8 +145,7 @@
                                                                 id="exampleInputMapel" placeholder="Mata Pelajaran">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="exampleInputGuru" class="form-label">Guru Mata
-                                                                Pelajaran:</label>
+                                                            <label for="exampleInputGuru" class="form-label">Guru Pengajar:</label>
                                                             <input type="text" name="guru" class="form-control"
                                                                 id="exampleInputGuru" placeholder="Guru">
                                                         </div>
@@ -163,8 +162,16 @@
                                     </div>
                                     {{-- End Modal --}}
 
-                                    <table class="table table-hover mt-3 border text-center"
-                                        style="font-family: 'Nunito', sans-serif;">
+                                    <div class="row g-3 align-items-center mt-2">
+                                        <div class="col-auto">
+                                            <form action="{{ route('mapel.index') }}" method="GET">
+                                                <input type="search" name="search" id="searchInput" class="form-control mx-sm-3" placeholder="Search">
+                                            </form>
+                                        </div>
+                                    </div>
+
+
+                                    <table class="table table-hover mt-3 border text-center" id="mapelTable" style="font-family: 'Nunito', sans-serif;">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -255,10 +262,10 @@
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>SMKN6 Balikpapan</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            Designed by <a href="https://bootstrapmade.com/">Ridhoo</a>
         </div>
     </footer><!-- End Footer -->
 

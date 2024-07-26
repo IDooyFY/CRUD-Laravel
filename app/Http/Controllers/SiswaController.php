@@ -12,11 +12,20 @@ class SiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $siswa = Siswa::all();
+        $search = $request->input('search');
         $kelas = Kelas::all();
-        return view('siswa.index', compact('siswa', 'kelas'));
+    $siswa = Siswa::query()
+                ->where('nis', 'LIKE', "%{$search}%")
+                ->orWhere('nama', 'LIKE', "%{$search}%")
+                ->orWhereHas('kelas', function ($query) use ($search) {
+                    $query->where('kelas', 'LIKE', "%{$search}%")
+                          ->orWhere('jurusan', 'LIKE', "%{$search}%");
+                })
+                ->get();
+
+    return view('siswa.index', compact('siswa', 'kelas'));
     }
 
     /**
@@ -82,4 +91,6 @@ class SiswaController extends Controller
 
         return redirect()->route('siswa.index')->with('success', 'Siswa berhasil dihapus');
     }
+
+    
 }

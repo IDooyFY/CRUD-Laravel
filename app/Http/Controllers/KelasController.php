@@ -12,10 +12,17 @@ class KelasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $kelas = Kelas::all();
+        $search = $request->input('search');
         $siswa = Siswa::all();
+        $kelas = Kelas::all();
+
+    $kelas = Kelas::query()
+                ->where('kelas', 'LIKE', "%{$search}%")
+                ->orWhere('jurusan', 'LIKE', "%{$search}%")
+                ->get();
+
         return view('kelas.index', compact('kelas', 'siswa'));
     }
 

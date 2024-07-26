@@ -12,12 +12,19 @@ class MapelController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $mapel = Mapel::all();
+
+        $search = $request->input('search');
         $siswa = Siswa::all();
         $kelas = Kelas::all();
-        return view("mapel.index", compact('mapel', 'kelas', 'siswa'));
+
+    $mapel = Mapel::query()
+                ->where('mapel', 'LIKE', "%{$search}%")
+                ->orWhere('guru', 'LIKE', "%{$search}%")
+                ->get();
+
+    return view('mapel.index', compact('mapel', 'kelas', 'siswa'));
     }
 
     /**
