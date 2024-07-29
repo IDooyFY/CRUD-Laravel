@@ -32,7 +32,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center">
-                <span class="d-none d-lg-block"><i class="bi bi-menu-button-wide-fill"></i> Menu mapel</span>
+                <span class="d-none d-lg-block"><i class="bi bi-journal-text"></i> Menu mapel</span>
             </a>
         </div><!-- End Logo -->
     </header><!-- End Header -->

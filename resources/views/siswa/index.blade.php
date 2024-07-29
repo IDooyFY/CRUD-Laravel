@@ -47,7 +47,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center">
-                <span class="d-none d-lg-block"><i class="bi bi-menu-button-wide-fill"></i> Menu siswa</span>
+                <span class="d-none d-lg-block"><i class="bi bi-person-vcard"></i> Menu siswa</span>
             </a>
         </div><!-- End Logo -->
     </header><!-- End Header -->

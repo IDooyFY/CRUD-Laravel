@@ -47,7 +47,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center">
-                <span class="d-none d-lg-block"><i class="bi bi-menu-button-wide-fill"></i> Menu kelas</span>
+                <span class="d-none d-lg-block"><i class="bi bi-house"></i> Menu kelas</span>
             </a>
         </div><!-- End Logo -->
     </header><!-- End Header -->
