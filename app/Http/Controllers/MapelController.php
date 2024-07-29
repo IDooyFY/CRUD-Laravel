@@ -21,7 +21,7 @@ class MapelController extends Controller
 
     $mapel = Mapel::query()
                 ->where('mapel', 'LIKE', "%{$search}%")
-                ->orWhere('guru', 'LIKE', "%{$search}%")
+                ->orWhere('keterangan', 'LIKE', "%{$search}%")
                 ->get();
 
     return view('mapel.index', compact('mapel', 'kelas', 'siswa'));
@@ -68,12 +68,12 @@ class MapelController extends Controller
     {
         $request->validate([
             'mapel' => 'required|string',
-            'guru' => 'required|string',
+            'keterangan' => 'string',
         ]);
 
         $mapel = Mapel::findOrFail($id);
         $mapel->mapel = $request->input('mapel');
-        $mapel->guru = $request->input('guru');
+        $mapel->keterangan = $request->input('keterangan');
         $mapel->save();
 
         return redirect()->route('mapel.index')->with('success', 'Mapel berhasil diperbarui');

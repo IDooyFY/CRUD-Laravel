@@ -62,6 +62,11 @@
                     <i class="bi bi-journal-text"></i><span>Mata Pelajaran</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="guru">
+                    <i class="bi bi-person-raised-hand"></i><span>Guru</span>
+                </a>
+            </li>
         </ul>
     </aside><!-- End Sidebar-->
 
@@ -145,9 +150,9 @@
                                                                 id="exampleInputMapel" placeholder="Mata Pelajaran">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="exampleInputGuru" class="form-label">Guru Pengajar:</label>
-                                                            <input type="text" name="guru" class="form-control"
-                                                                id="exampleInputGuru" placeholder="Guru">
+                                                            <label for="exampleInputGuru" class="form-label">Keterangan:</label>
+                                                            <input type="text" name="keterangan" class="form-control"
+                                                                id="exampleInputGuru" placeholder="Keterangan">
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
@@ -176,7 +181,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Mata Pelajaran</th>
-                                                <th>Guru Mata Pelajaran</th>
+                                                <th>Keterangan</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -186,16 +191,16 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $row->mapel }}</td>
-                                                <td>{{ $row->guru }}</td>
+                                                <td>{{ $row->keterangan }}</td>
                                                 <td>
                                                     <button type="button"
                                                         class="btn btn-sm btn-warning rounded ms-2 shadow-sm btn-edit-mapel"
                                                         data-bs-toggle="modal" data-bs-target="#modalEditMapel"
                                                         data-id="{{ $row->id }}" data-mapel="{{ $row->mapel }}"
-                                                        data-guru="{{ $row->guru }}">Edit Data</button>
+                                                        data-keterangan="{{ $row->keterangan }}">Edit Data</button>
                                                     <form action="{{ route('mapel.destroy', $row->id) }}" method="POST"
                                                         class="d-inline"
-                                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus kelas ini?')">
+                                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus Mapel ini?')">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit"
@@ -229,11 +234,9 @@
                                                                         id="editMapel" placeholder="Mata Pelajaran">
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="editGuru" class="form-label">Guru Mata
-                                                                        Pelajaran:</label>
+                                                                    <label for="editKeterangan" class="form-label">Keterangan:</label>
                                                                     <input type="text" class="form-control"
-                                                                        id="editGuru" name="guru" placeholder="Guru"
-                                                                        required>
+                                                                        id="editKeterangan" name="keterangan" placeholder="Keterangan">
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
@@ -293,11 +296,11 @@
                 button.addEventListener('click', function () {
                     var id = this.getAttribute('data-id');
                     var mapel = this.getAttribute('data-mapel');
-                    var guru = this.getAttribute('data-guru');
+                    var keterangan = this.getAttribute('data-keterangan');
 
                     formEditMapel.action = `/mapel/${id}`;
                     modalEditMapel.querySelector('#editMapel').value = mapel;
-                    modalEditMapel.querySelector('#editGuru').value = guru;
+                    modalEditMapel.querySelector('#editKeterangan').value = keterangan;
                 });
             });
         });

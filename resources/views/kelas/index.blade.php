@@ -80,6 +80,11 @@
                     <i class="bi bi-journal-text"></i><span>Mata Pelajaran</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="guru">
+                    <i class="bi bi-person-raised-hand"></i><span>Guru</span>
+                </a>
+            </li>
         </ul>
 
     </aside><!-- End Sidebar-->

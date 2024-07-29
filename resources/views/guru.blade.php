@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Menu Siswa</title>
+    <title>Menu Guru</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -47,7 +47,7 @@
 
         <div class="d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center">
-                <span class="d-none d-lg-block"><i class="bi bi-person-vcard"></i> Menu siswa</span>
+                <span class="d-none d-lg-block"><i class="bi bi-person-raised-hand"></i> Menu guru</span>
             </a>
         </div><!-- End Logo -->
     </header><!-- End Header -->
@@ -71,7 +71,7 @@
                 </a>
             </li><!-- End Dashboard Nav -->
             <li class="nav-item">
-                <a class="nav-link" href="siswa">
+                <a class="nav-link collapsed" href="siswa">
                     <i class="bi bi-person-vcard"></i><span>Siswa</span>
                 </a>
             </li>
@@ -81,7 +81,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="guru">
+                <a class="nav-link" href="guru">
                     <i class="bi bi-person-raised-hand"></i><span>Guru</span>
                 </a>
             </li>
@@ -92,11 +92,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Siswa</h1>
+            <h1>Guru</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Siswa</li>
+                    <li class="breadcrumb-item active">Guru</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -155,11 +155,11 @@
 
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Data Siswa | <span>{{ $siswa->count() ?? '' }}
-                                                Siswa</span></h5>
+                                        <h5 class="card-title">Data Guru | <span>{{ $guru->count() ?? '' }}
+                                                Guru</span></h5>
                                         <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
                                             data-bs-target="#exampleModal"><i class="bi bi-person-vcard"></i> Tambah
-                                            Siswa</button>
+                                            Guru</button>
 
 
                                         <!-- Modal -->
@@ -168,47 +168,35 @@
                                             <div class="modal-dialog modal-md">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Tambah Murid</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Tambah Guru</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="create" method="POST"
+                                                        <form action="create.guru" method="POST"
                                                             enctype="multipart/form-data">
                                                             @csrf
                                                             <div class="row">
                                                                 <!-- Kolom pertama -->
                                                                 <div class="mb-3">
-                                                                    <label for="exampleInputNis">NIS:</label>
-                                                                    <input type="number" class="form-control" name="nis"
-                                                                        placeholder="NIS kamu">
+                                                                    <label for="exampleInputNis">Nama:</label>
+                                                                    <input type="text" class="form-control" name="nama"
+                                                                        placeholder="Nama">
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="exampleInputNama">Nama:</label>
-                                                                    <input type="text" class="form-control" name="nama"
-                                                                        placeholder="Nama kamu">
+                                                                    <label for="exampleInputNama">No Induk:</label>
+                                                                    <input type="text" inputmode="numeric" class="form-control" name="no_induk" maxlength="5" placeholder="No Induk">
+
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="exampleInputNama">Alamat:</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="alamat" placeholder="Alamat">
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="exampleInputNama">No Telepon:</label>
                                                                     <input type="number" class="form-control"
-                                                                        name="no_telepon" placeholder="No Telepon kamu">
-                                                                </div>
-                                                                <!-- Kolom kedua -->
-
-                                                                <div class="mb-3">
-                                                                    <label for="exampleInputKelas"
-                                                                        class="form-label">Pilih
-                                                                        kelas:</label>
-                                                                    <select class="form-select" id="exampleInputKelas"
-                                                                        name="kelas_id"
-                                                                        aria-label="Default select example">
-                                                                        <option selected>Pilih kelas</option>
-                                                                        @foreach ($kelas as $kls)
-                                                                        <option value="{{ $kls->id }}">{{ $kls->kelas }}
-                                                                            {{
-                                                                            $kls->jurusan }}</option>
-                                                                        @endforeach
-                                                                    </select>
+                                                                        name="no_telepon" placeholder="no_telepon">
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -226,7 +214,7 @@
 
                                         <div class="row g-3 align-items-center mt-2">
                                             <div class="col-auto">
-                                                <form action="{{ route('siswa.index') }}" method="GET">
+                                                <form action="{{ route('guru') }}" method="GET">
                                                     <input type="search" name="search" id="searchInput" class="form-control mx-sm-3" placeholder="Search">
                                                 </form>
                                             </div>
@@ -237,9 +225,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>NIS</th>
                                                     <th>Nama</th>
-                                                    <th>Kelas</th>
+                                                    <th>No Induk</th>
+                                                    <th>Alamat</th>
                                                     <th>No Telepon</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -249,24 +237,25 @@
                                                 @php
                                                 $no = 1;
                                                 @endphp
-                                                @foreach ($siswa as $row)
+                                                @foreach ($guru as $row)
                                                 <tr>
                                                     <td>{{ $no++ }}</td>
-                                                    <td>{{ $row->nis }}</td>
                                                     <td>{{ $row->nama }}</td>
-                                                    <td>{{ $row->kelas->kelas }} {{ $row->kelas->jurusan }}</td>
+                                                    <td>{{ $row->no_induk }}</td>
+                                                    <td>{{ $row->alamat }}</td>
                                                     <td>{{ $row->no_telepon }}</td>
                                                     <td>
                                                         <button type="button"
                                                             class="btn btn-sm btn-warning rounded ms-2 shadow-sm btn-edit"
                                                             data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
-                                                            data-id="{{ $row->id }}" data-nis="{{ $row->nis }}"
+                                                            data-id="{{ $row->id }}"
                                                             data-nama="{{ $row->nama }}"
-                                                            data-no_telepon="{{ $row->no_telepon }}"
-                                                            data-kelas_id="{{ $row->kelas->id }}">
+                                                            data-no_induk="{{ $row->no_induk }}"
+                                                            data-alamat="{{ $row->alamat }}"
+                                                            data-no_telepon="{{ $row->no_telepon }}">
                                                             Edit Data
                                                         </button>
-                                                        <form action="{{ route('siswa.destroy', $row->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus siswa ini?')">
+                                                        <form action="{{ route('guru.destroy', $row->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus siswa ini?')">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="btn btn-sm btn-danger rounded ms-2 shadow-sm">Hapus data</button>
@@ -283,7 +272,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Edit
-                                                                    Murid</h5>
+                                                                    Guru</h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
@@ -294,37 +283,29 @@
                                                                     @method('PUT')
                                                                     <div class="row">
                                                                         <div class="mb-3">
-                                                                            <label for="editNis">NIS:</label>
-                                                                            <input type="number" class="form-control"
-                                                                                id="editNis" name="nis"
-                                                                                placeholder="NIS kamu">
-                                                                        </div>
-                                                                        <div class="mb-3">
                                                                             <label for="editNama">Nama:</label>
                                                                             <input type="text" class="form-control"
                                                                                 id="editNama" name="nama"
-                                                                                placeholder="Nama kamu">
+                                                                                placeholder="Nama">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="editNoInduk">No Induk:</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="editNo_induk" name="no_induk"
+                                                                                placeholder="No Induk" inputmode="numeric" maxlength="5">
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="editAlamat">Alamat:</label>
+                                                                            <input type="text" class="form-control"
+                                                                                id="editAlamat" name="alamat"
+                                                                                placeholder="Alamat">
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="editNoTelepon">No
                                                                                 Telepon:</label>
                                                                             <input type="number" class="form-control"
                                                                                 id="editNoTelepon" name="no_telepon"
-                                                                                placeholder="No Telepon kamu">
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label for="editKelas"
-                                                                                class="form-label">Pilih kelas:</label>
-                                                                            <select class="form-select" id="editKelas"
-                                                                                name="kelas_id"
-                                                                                aria-label="Default select example">
-                                                                                <option selected>Pilih kelas</option>
-                                                                                @foreach ($kelas as $kls)
-                                                                                <option value="{{ $kls->id }}">{{
-                                                                                    $kls->kelas }} {{ $kls->jurusan }}
-                                                                                </option>
-                                                                                @endforeach
-                                                                            </select>
+                                                                                placeholder="No Telepon">
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
@@ -391,16 +372,16 @@
                 editButtons.forEach(function (button) {
                     button.addEventListener('click', function () {
                         var id = this.getAttribute('data-id');
-                        var nis = this.getAttribute('data-nis');
                         var nama = this.getAttribute('data-nama');
-                        var noTelepon = this.getAttribute('data-no_telepon');
-                        var kelasId = this.getAttribute('data-kelas_id');
+                        var no_induk = this.getAttribute('data-no_induk');
+                        var alamat = this.getAttribute('data-alamat');
+                        var no_telepon = this.getAttribute('data-no_telepon');
 
-                        form.action = `/siswa/${id}`;
-                        modal.querySelector('#editNis').value = nis;
+                        form.action = `/guru/${id}`;
                         modal.querySelector('#editNama').value = nama;
-                        modal.querySelector('#editNoTelepon').value = noTelepon;
-                        modal.querySelector('#editKelas').value = kelasId;
+                        modal.querySelector('#editNo_induk').value = no_induk;
+                        modal.querySelector('#editAlamat').value = alamat;
+                        modal.querySelector('#editNoTelepon').value = no_telepon;
                     });
                 });
             });
