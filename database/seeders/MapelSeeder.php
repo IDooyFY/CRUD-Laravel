@@ -16,25 +16,25 @@ class MapelSeeder extends Seeder
         DB::table('mapels')->insert([
             [
                 'mapel' => 'Matematika',
-                'keterangan' => '',
+                'keterangan' => 'Mempelajari Statistika',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'mapel' => 'IPA',
-                'keterangan' => '',
+                'keterangan' => 'Mempelajari Ilmu Pengetahuan Alam',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
                 'mapel' => 'IPS',
-                'keterangan' => '',
+                'keterangan' => 'Mempelajari Sejarah',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'mapel' => 'SEJARAH',
-                'keterangan' => '',
+                'mapel' => 'Biologi',
+                'keterangan' => 'Mempelajari Anatomi Hewan',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
