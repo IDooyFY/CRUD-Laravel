@@ -181,52 +181,62 @@
                                         </div>
 
                                         <!-- Modal Edit -->
-<div class="modal fade bd-example-modal-lg" id="exampleModalEdit" tabindex="-1"
-aria-labelledby="exampleModalEditLabel" aria-hidden="true">
-<div class="modal-dialog modal-md">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalEditLabel">Edit Murid</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form id="formEdit" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="row">
-                    <div class="mb-3">
-                        <label for="editNis">NIS:</label>
-                        <input type="number" class="form-control" name="nis" id="editNis" placeholder="NIS kamu">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editNama">Nama:</label>
-                        <input type="text" class="form-control" name="nama" id="editNama" placeholder="Nama kamu">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editNoTelepon">No Telepon:</label>
-                        <input type="number" class="form-control" name="no_telepon" id="editNoTelepon"
-                            placeholder="No Telepon kamu">
-                    </div>
-                    <div class="mb-3">
-                        <label for="editKelas" class="form-label">Pilih kelas:</label>
-                        <select class="form-select" id="editKelas" name="kelas_id" aria-label="Default select example">
-                            <option selected>Pilih kelas</option>
-                            @foreach ($kelas as $kls)
-                            <option value="{{ $kls->id }}">{{ $kls->kelas }} {{ $kls->jurusan }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-</div>
+                                        <div class="modal fade bd-example-modal-lg" id="exampleModalEdit" tabindex="-1"
+                                            aria-labelledby="exampleModalEditLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-md">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalEditLabel">Edit Murid
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form id="formEdit" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="row">
+                                                                <div class="mb-3">
+                                                                    <label for="editNis">NIS:</label>
+                                                                    <input type="number" class="form-control" name="nis"
+                                                                        id="editNis" placeholder="NIS kamu">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="editNama">Nama:</label>
+                                                                    <input type="text" class="form-control" name="nama"
+                                                                        id="editNama" placeholder="Nama kamu">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="editNoTelepon">No Telepon:</label>
+                                                                    <input type="number" class="form-control"
+                                                                        name="no_telepon" id="editNoTelepon"
+                                                                        placeholder="No Telepon kamu">
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="editKelas" class="form-label">Pilih
+                                                                        kelas:</label>
+                                                                    <select class="form-select" id="editKelas"
+                                                                        name="kelas_id"
+                                                                        aria-label="Default select example">
+                                                                        <option selected>Pilih kelas</option>
+                                                                        @foreach ($kelas as $kls)
+                                                                        <option value="{{ $kls->id }}">{{ $kls->kelas }}
+                                                                            {{ $kls->jurusan }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Save
+                                                                    changes</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
 
                                         <div class="row g-3 align-items-center mt-2">
@@ -272,7 +282,7 @@ aria-labelledby="exampleModalEditLabel" aria-hidden="true">
                                                             Edit
                                                         </button>
                                                         <button type="button"
-                                                            class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn"
+                                                            class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn delete"
                                                             data-id="{{ $row->id }}">
                                                             Delete
                                                         </button>
@@ -312,116 +322,167 @@ aria-labelledby="exampleModalEditLabel" aria-hidden="true">
     <script src="assets/vendor/php-email-form/validate.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         $(document).ready(function() {
-    // CSRF Token setup
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    function updateRowNumbers() {
-        $('#siswaTable tr').each(function(index) {
-            $(this).find('td:first').text(index + 1);
-        });
-    }
-
-    // Add Siswa
-    $('#siswaForm').on('submit', function(e) {
-        e.preventDefault();
-        var formData = $(this).serialize();
-        console.log("Form Data: ", formData); // Log form data
-
-        $.ajax({
-            url: "{{ route('siswa.store') }}",
-            method: "POST",
-            data: formData,
-            success: function(response) {
-                console.log("Server Response: ", response); // Log server response
-
-                if (response && response.id) {
-                    $('#exampleModal').modal('hide');
-                    $('#siswaForm')[0].reset();
-                    $('#siswaTable').append('<tr id="siswa-' + response.id + '"><td></td><td>' + response.nis + '</td><td>' + response.nama + '</td><td>' + response.kelas + ' ' + response.jurusan + '</td><td>' + response.no_telepon + '</td><td><button class="btn btn-sm btn-success rounded ms-2 shadow-sm editBtn" data-id="' + response.id + '" data-nis="' + response.nis + '" data-nama="' + response.nama + '" data-kelas_id="' + response.kelas_id + '" data-no_telepon="' + response.no_telepon + '">Edit</button><button class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn" data-id="' + response.id + '">Delete</button></td></tr>');
-                    updateRowNumbers();
-                } else {
-                    alert('Failed to add the record. Please try again.');
-                }
-            },
-            error: function(xhr) {
-                console.error("Error Response: ", xhr); // Log error response
-                alert('Failed to add the record. Please try again.');
+        // CSRF Token setup
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    });
 
-    // Edit Siswa
-    $(document).on('click', '.editBtn', function() {
-        var id = $(this).data('id');
-        var nis = $(this).data('nis');
-        var nama = $(this).data('nama');
-        var kelas_id = $(this).data('kelas_id');
-        var no_telepon = $(this).data('no_telepon');
-        $('#editNis').val(nis);
-        $('#editNama').val(nama);
-        $('#editNoTelepon').val(no_telepon);
-        $('#editKelas').val(kelas_id);
-        $('#exampleModalEdit').modal('show');
-        $('#formEdit').off('submit').on('submit', function(e) {
+        function updateRowNumbers() {
+            $('#siswaTable tr').each(function(index) {
+                $(this).find('td:first').text(index + 1);
+            });
+        }
+
+        // Add Siswa
+        $('#siswaForm').on('submit', function(e) {
             e.preventDefault();
             var formData = $(this).serialize();
-            console.log("Edit Form Data: ", formData); // Log form data
+            console.log("Form Data: ", formData); // Log form data
 
             $.ajax({
-                url: "{{ url('siswa') }}/" + id,
-                method: "PUT",
+                url: "{{ route('siswa.store') }}",
+                method: "POST",
                 data: formData,
                 success: function(response) {
-                    console.log("Edit Server Response: ", response); // Log server response
+                    console.log("Server Response: ", response); // Log server response
 
                     if (response && response.id) {
-                        $('#exampleModalEdit').modal('hide');
-                        $('#siswa-' + id).replaceWith('<tr id="siswa-' + response.id + '"><td></td><td>' + response.nis + '</td><td>' + response.nama + '</td><td>' + response.kelas + ' ' + response.jurusan + '</td><td>' + response.no_telepon + '</td><td><button class="btn btn-sm btn-success rounded ms-2 shadow-sm editBtn" data-id="' + response.id + '" data-nis="' + response.nis + '" data-nama="' + response.nama + '" data-kelas_id="' + response.kelas_id + '" data-no_telepon="' + response.no_telepon + '">Edit</button><button class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn" data-id="' + response.id + '">Delete</button></td></tr>');
+                        $('#exampleModal').modal('hide');
+                        $('#siswaForm')[0].reset();
+                        $('#siswaTable').append('<tr id="siswa-' + response.id + '"><td></td><td>' + response.nis + '</td><td>' + response.nama + '</td><td>' + response.kelas + ' ' + response.jurusan + '</td><td>' + response.no_telepon + '</td><td><button class="btn btn-sm btn-success rounded ms-2 shadow-sm editBtn" data-id="' + response.id + '" data-nis="' + response.nis + '" data-nama="' + response.nama + '" data-kelas_id="' + response.kelas_id + '" data-no_telepon="' + response.no_telepon + '">Edit</button><button class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn" data-id="' + response.id + '">Delete</button></td></tr>');
                         updateRowNumbers();
+                        Swal.fire({
+                            icon: "success",
+                            title: "Data berhasil ditabahkan!",
+                            showConfirmButton: false,
+                            timer: 1500
+                            });
                     } else {
-                        alert('Failed to update the record. Please try again.');
+                        Swal.fire({
+                            title: "Kesalahan!",
+                            text: "Pastikan data sudah terisi semua.",
+                        });
                     }
                 },
                 error: function(xhr) {
-                    console.error("Edit Error Response: ", xhr); // Log error response
-                    alert('Failed to update the record. Please try again.');
+                    console.error("Error Response: ", xhr); // Log error response
+                    Swal.fire({
+                            title: "Kesalahan!",
+                            text: "Pastikan data sudah terisi semua.",
+                        });
                 }
             });
         });
-    });
 
-    // Delete Siswa
-    $(document).on('click', '.deleteBtn', function() {
-        var id = $(this).data('id');
-        if (confirm("Are you sure you want to delete this record?")) {
-            $.ajax({
-                url: "{{ url('siswa') }}/" + id,
-                method: "DELETE",
-                success: function(response) {
-                    console.log("Delete Server Response: ", response); // Log server response
+        // Edit Siswa
+        $(document).on('click', '.editBtn', function() {
+            var id = $(this).data('id');
+            var nis = $(this).data('nis');
+            var nama = $(this).data('nama');
+            var kelas_id = $(this).data('kelas_id');
+            var no_telepon = $(this).data('no_telepon');
+            $('#editNis').val(nis);
+            $('#editNama').val(nama);
+            $('#editNoTelepon').val(no_telepon);
+            $('#editKelas').val(kelas_id);
+            $('#exampleModalEdit').modal('show');
+            $('#formEdit').off('submit').on('submit', function(e) {
+                e.preventDefault();
+                var formData = $(this).serialize();
+                console.log("Edit Form Data: ", formData); // Log form data
 
-                    $('#siswa-' + id).remove();
-                    updateRowNumbers();
-                },
-                error: function(xhr) {
-                    console.error("Delete Error Response: ", xhr); // Log error response
-                    alert('Failed to delete the record. Please try again.');
+                $.ajax({
+                    url: "{{ url('siswa') }}/" + id,
+                    method: "PUT",
+                    data: formData,
+                    success: function(response) {
+                        console.log("Edit Server Response: ", response); // Log server response
+
+                        if (response && response.id) {
+                            $('#exampleModalEdit').modal('hide');
+                            $('#siswa-' + id).replaceWith('<tr id="siswa-' + response.id + '"><td></td><td>' + response.nis + '</td><td>' + response.nama + '</td><td>' + response.kelas + ' ' + response.jurusan + '</td><td>' + response.no_telepon + '</td><td><button class="btn btn-sm btn-success rounded ms-2 shadow-sm editBtn" data-id="' + response.id + '" data-nis="' + response.nis + '" data-nama="' + response.nama + '" data-kelas_id="' + response.kelas_id + '" data-no_telepon="' + response.no_telepon + '">Edit</button><button class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn" data-id="' + response.id + '">Delete</button></td></tr>');
+                            updateRowNumbers();
+
+                            Swal.fire({
+                            icon: "success",
+                            title: "Data berhasil diubah!",
+                            showConfirmButton: false,
+                            timer: 1500
+                            });
+
+                        } else {
+                        Swal.fire({
+                            title: "Kesalahan!",
+                            text: "Pastikan data sudah terisi semua.",
+                        });
+                        }
+                    },
+                    error: function(xhr) {
+                        console.error("Edit Error Response: ", xhr); // Log error response
+                        Swal.fire({
+                            title: "Kesalahan!",
+                            text: "Pastikan data sudah terisi semua.",
+                        });
+                    }
+                });
+            });
+        });
+
+        // Delete Siswa
+        $(document).on('click', '.deleteBtn', function() {
+            var id = $(this).data('id');
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "Want to delete this siswa?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ url('siswa') }}/" + id,
+                        method: "DELETE",
+                        success: function(response) {
+                            console.log("Delete Server Response: ", response); // Log server response
+
+                            $('#siswa-' + id).remove();
+                            updateRowNumbers();
+
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Data siswa has been deleted.",
+                                icon: "success"
+                            });
+                        },
+                        error: function(xhr) {
+                            console.error("Delete Error Response: ", xhr); // Log error response
+                            Swal.fire({
+                                title: "Error!",
+                                text: "Failed to delete the record. Please try again.",
+                                icon: "error"
+                            });
+                        }
+                    });
                 }
             });
-        }
-    });
+        });
 
-    // Initial update for row numbers
-    updateRowNumbers();
-});
+        // Initial update for row numbers
+        updateRowNumbers();
+    });
     </script>
+
 
 
 </body>
