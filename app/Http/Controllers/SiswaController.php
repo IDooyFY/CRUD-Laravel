@@ -16,16 +16,15 @@ class SiswaController extends Controller
     {
         $search = $request->input('search');
         $kelas = Kelas::all();
-    $siswa = Siswa::query()
-                ->where('nis', 'LIKE', "%{$search}%")
-                ->orWhere('nama', 'LIKE', "%{$search}%")
-                ->orWhereHas('kelas', function ($query) use ($search) {
-                    $query->where('kelas', 'LIKE', "%{$search}%")
-                          ->orWhere('jurusan', 'LIKE', "%{$search}%");
-                })
-                ->get();
+        $siswa = Siswa::query()
+            ->when($search, function ($query, $search) {
+                return $query->where('nama', 'like', "%{$search}%")
+                             ->orWhere('nis', 'like', "%{$search}%");
+            })
+            ->get();
 
-    return view('siswa.index', compact('siswa', 'kelas'));
+        $kelas = Kelas::all(); // Jangan lupa untuk mengambil data kelas
+        return view('siswa.index', compact('siswa', 'kelas'));
     }
 
     /**
@@ -33,17 +32,32 @@ class SiswaController extends Controller
      */
     public function create(Request $request)
     {
-        Siswa::create($request->all());
-        return redirect()->route('siswa.index')->with('success', 'Data berhasil ditambahkan.');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $validatedData = $request->validate([
+        'nis' => 'required|numeric',
+        'nama' => 'required|string|max:255',
+        'kelas_id' => 'required|exists:kelas,id',
+        'no_telepon' => 'required|string|max:15',
+    ]);
+
+    $siswa = Siswa::create($validatedData);
+
+    return response()->json([
+        'id' => $siswa->id,
+        'nis' => $siswa->nis,
+        'nama' => $siswa->nama,
+        'kelas' => $siswa->kelas->kelas,
+        'jurusan' => $siswa->kelas->jurusan,
+        'no_telepon' => $siswa->no_telepon
+    ]);
+}
 
     /**
      * Display the specified resource.
@@ -64,33 +78,40 @@ class SiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Siswa $siswa)
-    {
-        // Validasi data input
-        $validatedData = $request->validate([
-            'nis' => 'required|numeric',
-            'nama' => 'required|string|max:255',
-            'no_telepon' => 'required|numeric',
-            'kelas_id' => 'required|exists:kelas,id',
-        ]);
+    public function update(Request $request, $id)
+{
+    $validatedData = $request->validate([
+        'nis' => 'required|numeric',
+        'nama' => 'required|string|max:255',
+        'kelas_id' => 'required|exists:kelas,id',
+        'no_telepon' => 'required|string|max:15',
+    ]);
 
-        // Perbarui data siswa
-        $siswa->update($validatedData);
+    $siswa = Siswa::findOrFail($id);
+    $siswa->update($validatedData);
+    $siswa = Siswa::with('kelas')->findOrFail($id);
 
-        // Redirect atau respon sesuai kebutuhan
-        return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diperbarui.');
-    }
+    return response()->json([
+        'id' => $siswa->id,
+        'nis' => $siswa->nis,
+        'nama' => $siswa->nama,
+        'kelas' => $siswa->kelas->kelas,
+        'jurusan' => $siswa->kelas->jurusan,
+        'no_telepon' => $siswa->no_telepon
+    ]);
+}
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
     {
+
         $siswa = Siswa::findOrFail($id);
         $siswa->delete();
-
-        return redirect()->route('siswa.index')->with('success', 'Siswa berhasil dihapus');
+        return response()->json(['success' => 'Record has been deleted']);
     }
 
-    
+
 }
