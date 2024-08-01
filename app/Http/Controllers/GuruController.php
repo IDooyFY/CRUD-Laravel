@@ -14,30 +14,18 @@ class GuruController extends Controller
      */
     public function index(Request $request)
     {
-        {
-            $search = $request->input('search');
-            $kelas = Kelas::all();
-            $siswa = Siswa::all();
-            $guru = Guru::all();
-        $guru = Guru::query()
+        $search = $request->input('search');
+        $kelas = Kelas::all();
+        $siswa = Siswa::all();
+        $guru = Guru::all();
+        $gurus = Guru::query()
             ->where('nama', 'LIKE', "%{$search}%")
             ->orWhere('no_induk', 'LIKE', "%{$search}%")
             ->orWhere('alamat', 'LIKE', "%{$search}%")
             ->orWhere('no_telepon', 'LIKE', "%{$search}%")
-            ->get();
+            ->paginate(10); // Misalnya 10 item per halaman
 
-        return view('guru', compact('guru', 'kelas', 'siswa'));
-    }
-}
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(Request $request)
-    {
-        Guru::create($request->all());
-        return redirect()->route('guru')->with('success', 'Data berhasil ditambahkan.');
+        return view('guru', compact('gurus', 'kelas', 'siswa' , 'guru'));
     }
 
     /**
@@ -45,23 +33,29 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Validasi data
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',
+            'no_induk' => 'required|numeric|unique:gurus,no_induk',
+            'alamat' => 'required|string|max:255',
+            'no_telepon' => 'required|string|max:20',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Guru $guru)
-    {
-        //
+        // Buat Guru baru
+        $guru = Guru::create($validatedData);
+
+        // Kembalikan respon JSON
+        return response()->json($guru, 201);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Guru $guru)
+    public function edit(String $id)
     {
-        //
+        // Kembalikan data guru dalam format JSON
+        $gurus = Guru::findOrFail($id);
+        return response()->json($gurus);
     }
 
     /**
@@ -69,20 +63,28 @@ class GuruController extends Controller
      */
     public function update(Request $request, Guru $guru)
     {
-        // Validasi data input
+        // Validate data
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
             'no_induk' => 'required|numeric',
             'alamat' => 'required|string|max:255',
-            'no_telepon' => 'required|numeric',
+            'no_telepon' => 'required|string|max:20',
         ]);
 
-        // Perbarui data siswa
+        // Update Guru data
         $guru->update($validatedData);
 
-        // Redirect atau respon sesuai kebutuhan
-        return redirect()->route('guru')->with('success', 'Data guru berhasil diperbarui.');
+        // Return JSON response
+        return response()->json($guru);
     }
+
+    public function show(string $id)
+    {
+        // Show the details of a specific Kelas
+        $gurus = Guru::findOrFail($id);
+        return view('guru.show', compact('gurus'));
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -91,7 +93,7 @@ class GuruController extends Controller
     {
         $guru = Guru::findOrFail($id);
         $guru->delete();
-
-        return redirect()->route('guru')->with('success', 'Guru berhasil dihapus');
+        return response()->json(['message' => 'Guru deleted successfully'], 200);
     }
 }
+

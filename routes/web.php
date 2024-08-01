@@ -35,7 +35,7 @@ Route::get('kelas',[KelasController::class,'index'])->name('kelas.index');
 
 Route::get('siswa',[SiswaController::class,'index'])->name('siswa.index');
 
-Route::get('guru',[GuruController::class,'index'])->name('guru');
+Route::get('guru',[GuruController::class,'index'])->name('guru.index');
 
 Route::post('create.kelas',[KelasController::class,'create'])->name('create');
 

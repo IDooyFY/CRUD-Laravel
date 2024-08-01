@@ -242,8 +242,6 @@
 
                                             </tbody>
                                         </table>
-
-
                                         {{ $kelas->links() }}
 
                                     </div>
