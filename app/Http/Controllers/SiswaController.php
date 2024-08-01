@@ -13,19 +13,29 @@ class SiswaController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {
-        $search = $request->input('search');
-        $kelas = Kelas::all();
-        $siswa = Siswa::query()
-            ->when($search, function ($query, $search) {
-                return $query->where('nama', 'like', "%{$search}%")
-                             ->orWhere('nis', 'like', "%{$search}%");
-            })
-            ->get();
+{
+    $search = $request->input('search');
+    $kelas = Kelas::all();
 
-        $kelas = Kelas::all(); // Jangan lupa untuk mengambil data kelas
-        return view('siswa.index', compact('siswa', 'kelas'));
-    }
+    $siswa = Siswa::query()
+        ->when($search, function ($query, $search) {
+            return $query->where('nama', 'like', "%{$search}%")
+                         ->orWhere('nis', 'like', "%{$search}%")
+                         ->orWhereHas('kelas', function ($query) use ($search) {
+                             $query->where('kelas', 'like', "%{$search}%")
+                                   ->orWhere('jurusan', 'like', "%{$search}%");
+                         });
+        })
+        ->paginate(10); // Sesuaikan jumlah per halaman sesuai kebutuhan Anda
+
+    $totalSiswa = Siswa::count(); // Menghitung jumlah total siswa
+
+    return view('siswa.index', compact('siswa', 'totalSiswa', 'kelas'));
+}
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -41,23 +51,21 @@ class SiswaController extends Controller
     public function store(Request $request)
 {
     $validatedData = $request->validate([
-        'nis' => 'required|numeric',
-        'nama' => 'required|string|max:255',
+        'nis' => 'required|unique:siswas',
+        'nama' => 'required',
+        'no_telepon' => 'required',
         'kelas_id' => 'required|exists:kelas,id',
-        'no_telepon' => 'required|string|max:15',
     ]);
 
     $siswa = Siswa::create($validatedData);
 
-    return response()->json([
-        'id' => $siswa->id,
-        'nis' => $siswa->nis,
-        'nama' => $siswa->nama,
-        'kelas' => $siswa->kelas->kelas,
-        'jurusan' => $siswa->kelas->jurusan,
-        'no_telepon' => $siswa->no_telepon
-    ]);
+    $lastPage = Siswa::paginate(10)->lastPage(); // Ambil nomor halaman terakhir
+
+    return response()->json(['siswa' => $siswa, 'lastPage' => $lastPage]);
 }
+
+
+
 
     /**
      * Display the specified resource.
@@ -87,19 +95,26 @@ class SiswaController extends Controller
         'no_telepon' => 'required|string|max:15',
     ]);
 
+    // Temukan siswa dengan ID yang diberikan dan lakukan update
     $siswa = Siswa::findOrFail($id);
     $siswa->update($validatedData);
-    $siswa = Siswa::with('kelas')->findOrFail($id);
+
+    // Muat relasi kelas
+    $siswa->load('kelas');
 
     return response()->json([
         'id' => $siswa->id,
         'nis' => $siswa->nis,
         'nama' => $siswa->nama,
-        'kelas' => $siswa->kelas->kelas,
-        'jurusan' => $siswa->kelas->jurusan,
+        'kelas' => [
+            'kelas' => $siswa->kelas->kelas,
+            'jurusan' => $siswa->kelas->jurusan,
+        ],
         'no_telepon' => $siswa->no_telepon
     ]);
+
 }
+
 
 
     /**

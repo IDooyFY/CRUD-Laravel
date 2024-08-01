@@ -4,22 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>Menu Kelas</title>
+    <title>Menu Siswa</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
-
-    <!-- Favicons -->
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -27,24 +18,15 @@
     <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
 
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
-
         <div class="d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center">
                 <span class="d-none d-lg-block"><i class="bi bi-house"></i> Menu kelas</span>
@@ -54,9 +36,7 @@
 
     <!-- ======= Sidebar ======= -->
     <aside id="sidebar" class="sidebar">
-
         <ul class="sidebar-nav" id="sidebar-nav">
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/">
                     <i class="bi bi-grid"></i>
@@ -86,36 +66,31 @@
                 </a>
             </li>
         </ul>
-
     </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
-
         <div class="pagetitle">
-            <h1>Kelas</h1>
+            <h1>Mata Pelajaran</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Kelas</li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item active">Mata Pelajaran</li>
                 </ol>
             </nav>
-        </div><!-- End Page Title -->
+        </div>
+        <!-- End Page Title -->
 
         <section class="section dashboard">
             <div class="row">
 
                 <div class="row">
-
                     <!-- Sales Card -->
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card sales-card">
-
                             <div class="card-body">
                                 <h5 class="card-title">Jumlah Kelas</h5>
-
                                 <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-house"></i>
                                     </div>
                                     <div class="ps-3">
@@ -123,20 +98,16 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div><!-- End Sales Card -->
 
                     <!-- Revenue Card -->
                     <div class="col-xxl-4 col-md-6">
                         <div class="card info-card revenue-card">
-
                             <div class="card-body">
                                 <h5 class="card-title">Jumlah Siswa</h5>
-
                                 <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-person-vcard"></i>
                                     </div>
                                     <div class="ps-3">
@@ -144,7 +115,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div><!-- End Revenue Card -->
 
@@ -152,212 +122,302 @@
                     <section class="section">
                         <div class="row">
                             <div class="col-lg-12">
-
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">Data Kelas | <span>{{ $kelas->count() ?? '' }}
                                                 Kelas</span></h5>
-                                        <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal"><i class="bi bi-house-add"></i> Tambah
+                                        <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#createKelasModal"><i class="bi bi-house-add"></i> Tambah
                                             Kelas</button>
 
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
+                                        <!-- Modal for Creating Kelas -->
+                                        <div class="modal fade bd-example-modal-lg" id="createKelasModal" tabindex="-1" aria-labelledby="createKelasModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-md">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Tambah Kelas</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
+                                                        <h5 class="modal-title" id="createKelasModalLabel">Tambah Kelas
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="create.kelas" method="POST"
-                                                            enctype="multipart/form-data">
+                                                        <form id="createKelasForm" method="POST" enctype="multipart/form-data">
                                                             @csrf
+                                                            <div class="row">
+                                                                <div class="mb-3">
+                                                                    <label for="kelasSelect">Kelas:</label>
+                                                                    <select class="form-select" id="kelasSelect" name="kelas" required>
+                                                                        <option selected>Pilih kelas</option>
+                                                                        <option value="Kelas 10">Kelas 10</option>
+                                                                        <option value="Kelas 11">Kelas 11</option>
+                                                                        <option value="Kelas 12">Kelas 12</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="jurusanInput">Jurusan:</label>
+                                                                    <input type="text" class="form-control" name="jurusan" id="jurusanInput" placeholder="Jurusan" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Edit Modal -->
+                                        <div class="modal fade" id="editKelasModal" tabindex="-1" aria-labelledby="editKelasModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <form id="editKelasForm" method="POST">
+                                                        @method('PUT')
+                                                        @csrf
+                                                        <input type="hidden" id="editKelasId" name="id">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editKelasModalLabel">Edit Kelas
+                                                            </h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
                                                             <div class="mb-3">
-                                                                <label for="exampleInputKelas" class="form-label">Pilih
-                                                                    kelas:</label>
-                                                                <select class="form-select" id="exampleInputKelas"
-                                                                    name="kelas" aria-label="Default select example">
-                                                                    <option selected>Pilih kelas</option>
+                                                                <label for="editKelasSelect" class="form-label">Kelas</label>
+                                                                <select id="editKelasSelect" class="form-select" name="kelas">
                                                                     <option value="Kelas 10">Kelas 10</option>
                                                                     <option value="Kelas 11">Kelas 11</option>
                                                                     <option value="Kelas 12">Kelas 12</option>
                                                                 </select>
                                                             </div>
-
                                                             <div class="mb-3">
-                                                                <label for="exampleInputJurusan"
-                                                                    class="form-label">Jurusan:</label>
-                                                                <input type="text" name="jurusan" class="form-control"
-                                                                    id="exampleInputJurusan">
+                                                                <label for="editJurusanInput" class="form-label">Jurusan</label>
+                                                                <input type="text" class="form-control" id="editJurusanInput" name="jurusan">
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Submit</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Save
+                                                                changes</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- End Modal --}}
 
                                         <div class="row g-3 align-items-center mt-2">
                                             <div class="col-auto">
                                                 <form action="{{ route('kelas.index') }}" method="GET">
-                                                    <input type="search" name="search" id="searchInput" class="form-control mx-sm-3" placeholder="Search">
+                                                    <input type="search" name="search" id="inputPassword6" class="form-control" aria-labelledby="passwordHelpInline" placeholder="Cari disini">
                                                 </form>
                                             </div>
+                                            <div class="col-auto">
+                                            </div>
                                         </div>
+                                        <br>
 
-                                        <table class="table table-hover mt-3 border text-center"
-                                            style="font-family: 'Nunito', sans-serif;">
+                                        <table id="kelasTable" class="table table-hover mt-3 border text-center">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Kelas</th>
                                                     <th>Jurusan</th>
-                                                    <th>Jumlah Murid</th>
+                                                    <th>Jumlah siswa</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
-
                                             <tbody>
                                                 @php
-                                                $no = 1;
+                                                $no = ($kelas->currentPage() - 1) * $kelas->perPage() + 1;
                                                 @endphp
                                                 @foreach ($kelas as $row)
-                                                <tr>
+                                                <tr id="kelas-{{ $row->id }}">
                                                     <td>{{ $no++ }}</td>
                                                     <td>{{ $row->kelas }}</td>
                                                     <td>{{ $row->jurusan }}</td>
                                                     <td>{{ $row->siswa->count() }}</td>
                                                     <td>
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-warning rounded ms-2 shadow-sm btn-edit-kelas"
-                                                            data-bs-toggle="modal" data-bs-target="#modalEditKelas"
-                                                            data-id="{{ $row->id }}" data-kelas="{{ $row->kelas }}"
-                                                            data-jurusan="{{ $row->jurusan }}">
-                                                            Edit Data
-                                                        </button>
-                                                        <form action="{{ route('kelas.destroy', $row->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kelas ini?')">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-danger rounded ms-2 shadow-sm">Hapus data</button>
-                                                        </form>
+                                                        <button class="btn btn-sm btn-success editBtn" data-id="{{ $row->id }}">Edit</button>
+                                                        <button type="button" class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn" data-id="{{ $row->id }}">Delete</button>
                                                     </td>
                                                 </tr>
                                                 @endforeach
 
-                                                <!-- Modal Edit Kelas-->
-                                                <div class="modal fade" id="modalEditKelas" tabindex="-1"
-                                                    aria-labelledby="modalEditKelasLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="modalEditKelasLabel">Edit
-                                                                    Kelas</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form id="formEditKelas" method="POST"
-                                                                    enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <div class="mb-3">
-                                                                        <label for="editKelasNama"
-                                                                            class="form-label">Pilih kelas:</label>
-                                                                        <select class="form-select" id="editKelasNama"
-                                                                            name="kelas"
-                                                                            aria-label="Default select example">
-                                                                            <option value="Kelas 10">Kelas 10</option>
-                                                                            <option value="Kelas 11">Kelas 11</option>
-                                                                            <option value="Kelas 12">Kelas 12</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label for="editKelasJurusan"
-                                                                            class="form-label">Jurusan:</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="editKelasJurusan" name="jurusan"
-                                                                            required>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-bs-dismiss="modal">Close</button>
-                                                                        <button type="submit"
-                                                                            class="btn btn-primary">Submit</button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- End Modal Edit Kelas-->
-
-
-
                                             </tbody>
                                         </table>
+
+
+                                        {{ $kelas->links() }}
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
-                    <!-- Table -->
-
+                    <!-- End Table -->
                 </div>
             </div>
         </section>
 
-    </main>
-    <!-- End #main -->
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright <strong><span>SMKN6 Balikpapan</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-            Designed by <a href="https://bootstrapmade.com/">Ridhoo</a>
-        </div>
-    </footer><!-- End Footer -->
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    </main><!-- End #main -->
 
     <!-- Vendor JS Files -->
+    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/chart.js/chart.min.js"></script>
+    <script src="assets/vendor/echarts/echarts.min.js"></script>
+    <script src="assets/vendor/quill/quill.min.js"></script>
+    <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var editKelasButtons = document.querySelectorAll('.btn-edit-kelas');
-            var modalEditKelas = document.getElementById('modalEditKelas');
-            var formEditKelas = document.getElementById('formEditKelas');
+        function updateTableNumbers() {
+            $('#kelasTable tbody tr').each(function(index) {
+                $(this).find('td:first').text(index + 1);
+            });
+        }
 
-            editKelasButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                    var id = this.getAttribute('data-id');
-                    var kelas = this.getAttribute('data-kelas');
-                    var jurusan = this.getAttribute('data-jurusan');
+        $(document).ready(function() {
+            // Create Kelas
+            $('#createKelasForm').on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/kelas",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#createKelasModal').modal('hide');
+                        $('#kelasTable tbody').append(
+                            `<tr id="kelas-${response.id}">
+                                <td></td>
+                                <td>${response.kelas}</td>
+                                <td>${response.jurusan}</td>
+                                <td>${response.siswa_count}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-success editBtn" data-id="${response.id}">Edit</button>
+                                    <button type="button" class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn"
+                                        data-id="${response.id}">Delete</button>
+                                </td>
+                            </tr>`
+                        );
+                        updateTableNumbers();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Data berhasil ditambahkan!'
+                        });
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Terjadi kesalahan!'
+                        });
+                    }
+                });
+            });
 
-                    formEditKelas.action = `/kelas/${id}`;
-                    modalEditKelas.querySelector('#editKelasNama').value = kelas;
-                    modalEditKelas.querySelector('#editKelasJurusan').value = jurusan;
+            // Edit Kelas
+            $(document).on('click', '.editBtn', function() {
+                let id = $(this).data('id');
+                $.get(`/kelas/${id}/edit`, function(data) {
+                    $('#editKelasId').val(data.id);
+                    $('#editKelasSelect').val(data.kelas);
+                    $('#editJurusanInput').val(data.jurusan);
+                    $('#editKelasModal').modal('show');
+                });
+            });
+
+            $('#editKelasForm').on('submit', function(e) {
+                e.preventDefault();
+                let id = $('#editKelasId').val();
+                $.ajax({
+                    type: "PUT",
+                    url: "/kelas/" + id,
+                    data: $(this).serialize(),
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        $('#editKelasModal').modal('hide');
+                        $(`#kelas-${response.id}`).html(
+                            `<td></td>
+                            <td>${response.kelas}</td>
+                            <td>${response.jurusan}</td>
+                            <td>${response.siswa_count}</td>
+                            <td>
+                                <button class="btn btn-sm btn-success editBtn" data-id="${response.id}">Edit</button>
+                                <button type="button" class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn"
+                                    data-id="${response.id}">Delete</button>
+                            </td>`
+                        );
+                        updateTableNumbers();
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Data berhasil diupdate!'
+                        });
+                    },
+                    error: function(xhr) {
+                        console.log(xhr);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Terjadi kesalahan!'
+                        });
+                    }
+                });
+            });
+
+            // Delete Kelas
+            $(document).on('click', '.deleteBtn', function() {
+                let id = $(this).data('id');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: "/kelas/" + id,
+                            data: {
+                                "_token": $('meta[name="csrf-token"]').attr('content'),
+                            },
+                            success: function(response) {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your data has been deleted.',
+                                    'success'
+                                ).then(() => {
+                                    $(`#kelas-${id}`).remove();
+                                    updateTableNumbers();
+                                });
+                            },
+                            error: function(error) {
+                                console.log(error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Terjadi kesalahan!'
+                                });
+                            }
+                        });
+                    }
                 });
             });
         });
     </script>
-
-
 </body>
 
 </html>

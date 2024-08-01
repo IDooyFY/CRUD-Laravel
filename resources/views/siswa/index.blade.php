@@ -10,9 +10,7 @@
     <link href="assets/img/favicon.png" rel="icon">
     <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
     <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -84,8 +82,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Jumlah Kelas</h5>
                                 <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-house"></i>
                                     </div>
                                     <div class="ps-3">
@@ -101,12 +98,11 @@
                             <div class="card-body">
                                 <h5 class="card-title">Jumlah Siswa</h5>
                                 <div class="d-flex align-items-center">
-                                    <div
-                                        class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="bi bi-person-vcard"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{ $siswa->count() }} Siswa</h6>
+                                        <h6>{{ $totalSiswa }} Siswa</h6>
                                     </div>
                                 </div>
                             </div>
@@ -118,48 +114,37 @@
                             <div class="col-lg-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">Data Siswa | <span>{{ $siswa->count() ?? '' }}
+                                        <h5 class="card-title">Data Siswa | <span>{{ $totalSiswa }}
                                                 Siswa</span></h5>
-                                        <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal"><i class="bi bi-person-vcard"></i> Tambah
+                                        <button type="button" class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-person-vcard"></i> Tambah
                                             Siswa</button>
 
-                                        <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Tambah Murid</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form id="siswaForm" method="POST"
-                                                            enctype="multipart/form-data">
+                                                        <form id="siswaForm" method="POST" enctype="multipart/form-data">
                                                             @csrf
                                                             <div class="row">
                                                                 <div class="mb-3">
                                                                     <label for="exampleInputNis">NIS:</label>
-                                                                    <input type="number" class="form-control" name="nis"
-                                                                        id="nis" placeholder="NIS kamu">
+                                                                    <input type="number" class="form-control" name="nis" id="nis" placeholder="NIS kamu">
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="exampleInputNama">Nama:</label>
-                                                                    <input type="text" class="form-control" name="nama"
-                                                                        id="nama" placeholder="Nama kamu">
+                                                                    <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama kamu">
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="exampleInputNama">No Telepon:</label>
-                                                                    <input type="number" class="form-control"
-                                                                        name="no_telepon" id="no_telepon"
-                                                                        placeholder="No Telepon kamu">
+                                                                    <input type="number" class="form-control" name="no_telepon" id="no_telepon" placeholder="No Telepon kamu">
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    <label for="exampleInputKelas"
-                                                                        class="form-label">Pilih kelas:</label>
-                                                                    <select class="form-select" id="kelas_id"
-                                                                        name="kelas_id"
-                                                                        aria-label="Default select example">
+                                                                    <label for="exampleInputKelas" class="form-label">Pilih kelas:</label>
+                                                                    <select class="form-select" id="kelas_id" name="kelas_id" aria-label="Default select example">
                                                                         <option selected>Pilih kelas</option>
                                                                         @foreach ($kelas as $kls)
                                                                         <option value="{{ $kls->id }}">{{ $kls->kelas }}
@@ -169,10 +154,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Submit</button>
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Submit</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -181,15 +164,13 @@
                                         </div>
 
                                         <!-- Modal Edit -->
-                                        <div class="modal fade bd-example-modal-lg" id="exampleModalEdit" tabindex="-1"
-                                            aria-labelledby="exampleModalEditLabel" aria-hidden="true">
+                                        <div class="modal fade bd-example-modal-lg" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalEditLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-md">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalEditLabel">Edit Murid
                                                         </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <form id="formEdit" method="POST">
@@ -198,26 +179,20 @@
                                                             <div class="row">
                                                                 <div class="mb-3">
                                                                     <label for="editNis">NIS:</label>
-                                                                    <input type="number" class="form-control" name="nis"
-                                                                        id="editNis" placeholder="NIS kamu">
+                                                                    <input type="number" class="form-control" name="nis" id="editNis" placeholder="NIS kamu">
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="editNama">Nama:</label>
-                                                                    <input type="text" class="form-control" name="nama"
-                                                                        id="editNama" placeholder="Nama kamu">
+                                                                    <input type="text" class="form-control" name="nama" id="editNama" placeholder="Nama kamu">
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="editNoTelepon">No Telepon:</label>
-                                                                    <input type="number" class="form-control"
-                                                                        name="no_telepon" id="editNoTelepon"
-                                                                        placeholder="No Telepon kamu">
+                                                                    <input type="number" class="form-control" name="no_telepon" id="editNoTelepon" placeholder="No Telepon kamu">
                                                                 </div>
                                                                 <div class="mb-3">
                                                                     <label for="editKelas" class="form-label">Pilih
                                                                         kelas:</label>
-                                                                    <select class="form-select" id="editKelas"
-                                                                        name="kelas_id"
-                                                                        aria-label="Default select example">
+                                                                    <select class="form-select" id="editKelas" name="kelas_id" aria-label="Default select example">
                                                                         <option selected>Pilih kelas</option>
                                                                         @foreach ($kelas as $kls)
                                                                         <option value="{{ $kls->id }}">{{ $kls->kelas }}
@@ -227,8 +202,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                                 <button type="submit" class="btn btn-primary">Save
                                                                     changes</button>
                                                             </div>
@@ -242,14 +216,13 @@
                                         <div class="row g-3 align-items-center mt-2">
                                             <div class="col-auto">
                                                 <form action="{{ route('siswa.index') }}" method="GET">
-                                                    <input type="search" name="search" id="searchInput"
-                                                        class="form-control mx-sm-3" placeholder="Search">
+                                                    <input type="search" name="search" id="searchInput" class="form-control mx-sm-3" placeholder="Search" value="{{ request('search') }}">
                                                 </form>
+
                                             </div>
                                         </div>
 
-                                        <table class="table table-hover mt-3 border text-center"
-                                            style="font-family: 'Nunito', sans-serif;">
+                                        <table class="table table-hover mt-3 border text-center" style="font-family: 'Nunito', sans-serif;">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -272,18 +245,10 @@
                                                     <td>{{ $row->kelas->kelas }} {{ $row->kelas->jurusan }}</td>
                                                     <td>{{ $row->no_telepon }}</td>
                                                     <td>
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-success rounded ms-2 shadow-sm editBtn"
-                                                            data-bs-toggle="modal" data-bs-target="#exampleModalEdit"
-                                                            data-id="{{ $row->id }}" data-nis="{{ $row->nis }}"
-                                                            data-nama="{{ $row->nama }}"
-                                                            data-no_telepon="{{ $row->no_telepon }}"
-                                                            data-kelas_id="{{ $row->kelas->id }}">
+                                                        <button type="button" class="btn btn-sm btn-success rounded ms-2 shadow-sm editBtn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit" data-id="{{ $row->id }}" data-nis="{{ $row->nis }}" data-nama="{{ $row->nama }}" data-no_telepon="{{ $row->no_telepon }}" data-kelas_id="{{ $row->kelas->id }}">
                                                             Edit
                                                         </button>
-                                                        <button type="button"
-                                                            class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn delete"
-                                                            data-id="{{ $row->id }}">
+                                                        <button type="button" class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn delete" data-id="{{ $row->id }}">
                                                             Delete
                                                         </button>
                                                     </td>
@@ -291,6 +256,9 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                        <div class="pagination-wrapper">
+                                            {{ $siswa->links('pagination::bootstrap-4') }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -310,8 +278,7 @@
         </div>
     </footer>
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/vendor/chart.js/chart.min.js"></script>
@@ -323,165 +290,214 @@
     <script src="assets/js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         $(document).ready(function() {
-        // CSRF Token setup
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        function updateRowNumbers() {
-            $('#siswaTable tr').each(function(index) {
-                $(this).find('td:first').text(index + 1);
-            });
-        }
-
-        // Add Siswa
-        $('#siswaForm').on('submit', function(e) {
-            e.preventDefault();
-            var formData = $(this).serialize();
-            console.log("Form Data: ", formData); // Log form data
-
-            $.ajax({
-                url: "{{ route('siswa.store') }}",
-                method: "POST",
-                data: formData,
-                success: function(response) {
-                    console.log("Server Response: ", response); // Log server response
-
-                    if (response && response.id) {
-                        $('#exampleModal').modal('hide');
-                        $('#siswaForm')[0].reset();
-                        $('#siswaTable').append('<tr id="siswa-' + response.id + '"><td></td><td>' + response.nis + '</td><td>' + response.nama + '</td><td>' + response.kelas + ' ' + response.jurusan + '</td><td>' + response.no_telepon + '</td><td><button class="btn btn-sm btn-success rounded ms-2 shadow-sm editBtn" data-id="' + response.id + '" data-nis="' + response.nis + '" data-nama="' + response.nama + '" data-kelas_id="' + response.kelas_id + '" data-no_telepon="' + response.no_telepon + '">Edit</button><button class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn" data-id="' + response.id + '">Delete</button></td></tr>');
-                        updateRowNumbers();
-                        Swal.fire({
-                            icon: "success",
-                            title: "Data berhasil ditabahkan!",
-                            showConfirmButton: false,
-                            timer: 1500
-                            });
-                    } else {
-                        Swal.fire({
-                            title: "Kesalahan!",
-                            text: "Pastikan data sudah terisi semua.",
-                        });
-                    }
-                },
-                error: function(xhr) {
-                    console.error("Error Response: ", xhr); // Log error response
-                    Swal.fire({
-                            title: "Kesalahan!",
-                            text: "Pastikan data sudah terisi semua.",
-                        });
+            // CSRF Token setup
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-        });
 
-        // Edit Siswa
-        $(document).on('click', '.editBtn', function() {
-            var id = $(this).data('id');
-            var nis = $(this).data('nis');
-            var nama = $(this).data('nama');
-            var kelas_id = $(this).data('kelas_id');
-            var no_telepon = $(this).data('no_telepon');
-            $('#editNis').val(nis);
-            $('#editNama').val(nama);
-            $('#editNoTelepon').val(no_telepon);
-            $('#editKelas').val(kelas_id);
-            $('#exampleModalEdit').modal('show');
-            $('#formEdit').off('submit').on('submit', function(e) {
-                e.preventDefault();
-                var formData = $(this).serialize();
-                console.log("Edit Form Data: ", formData); // Log form data
+            // Update nomor baris
+            function updateRowNumbers() {
+                $('#siswaTable tbody tr').each(function(index) {
+                    $(this).find('td:first').text(index + 1); // Menyisipkan nomor urut
+                });
+            }
 
+            function loadLastPage(lastPage) {
                 $.ajax({
-                    url: "{{ url('siswa') }}/" + id,
-                    method: "PUT",
-                    data: formData,
-                    success: function(response) {
-                        console.log("Edit Server Response: ", response); // Log server response
-
-                        if (response && response.id) {
-                            $('#exampleModalEdit').modal('hide');
-                            $('#siswa-' + id).replaceWith('<tr id="siswa-' + response.id + '"><td></td><td>' + response.nis + '</td><td>' + response.nama + '</td><td>' + response.kelas + ' ' + response.jurusan + '</td><td>' + response.no_telepon + '</td><td><button class="btn btn-sm btn-success rounded ms-2 shadow-sm editBtn" data-id="' + response.id + '" data-nis="' + response.nis + '" data-nama="' + response.nama + '" data-kelas_id="' + response.kelas_id + '" data-no_telepon="' + response.no_telepon + '">Edit</button><button class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn" data-id="' + response.id + '">Delete</button></td></tr>');
-                            updateRowNumbers();
-
-                            Swal.fire({
-                            icon: "success",
-                            title: "Data berhasil diubah!",
-                            showConfirmButton: false,
-                            timer: 1500
-                            });
-
-                        } else {
+                    url: "{{ route('siswa.index') }}",
+                    method: "GET",
+                    data: {
+                        page: lastPage
+                    },
+                    success: function(data) {
+                        $('#siswaTable tbody').html(data);
+                        updateRowNumbers();
+                    },
+                    error: function(xhr) {
+                        console.error("Load Last Page Error: ", xhr);
                         Swal.fire({
                             title: "Kesalahan!",
-                            text: "Pastikan data sudah terisi semua.",
+                            text: "Gagal memuat halaman terakhir."
                         });
+                    }
+                });
+            }
+
+            // Add Siswa
+            $('#siswaForm').on('submit', function(e) {
+                e.preventDefault();
+                var formData = $(this).serialize();
+                console.log("Form Data: ", formData); // Log form data
+
+                $.ajax({
+                    url: "{{ route('siswa.store') }}",
+                    method: "POST",
+                    data: formData,
+                    success: function(response) {
+                        console.log("Server Response: ", response); // Log server response
+
+                        if (response && response.siswa.id) {
+                            $('#exampleModal').modal('hide');
+                            $('#siswaForm')[0].reset();
+
+                            // Redirect ke halaman terakhir
+                            loadLastPage(response.lastPage);
+
+                            Swal.fire({
+                                icon: "success",
+                                title: "Data berhasil ditambahkan!",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Kesalahan!",
+                                text: "Pastikan data sudah terisi semua."
+                            });
                         }
                     },
                     error: function(xhr) {
-                        console.error("Edit Error Response: ", xhr); // Log error response
+                        console.error("Error Response: ", xhr); // Log error response
                         Swal.fire({
                             title: "Kesalahan!",
-                            text: "Pastikan data sudah terisi semua.",
+                            text: "Pastikan data sudah terisi semua."
                         });
                     }
                 });
             });
-        });
 
-        // Delete Siswa
-        $(document).on('click', '.deleteBtn', function() {
-            var id = $(this).data('id');
+            // Edit Siswa
+            $(document).on('click', '.editBtn', function() {
+                var id = $(this).data('id');
+                var nis = $(this).data('nis');
+                var nama = $(this).data('nama');
+                var kelas_id = $(this).data('kelas_id');
+                var no_telepon = $(this).data('no_telepon');
 
-            Swal.fire({
-                title: "Are you sure?",
-                text: "Want to delete this siswa?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
+                $('#editNis').val(nis);
+                $('#editNama').val(nama);
+                $('#editNoTelepon').val(no_telepon);
+                $('#editKelas').val(kelas_id);
+                $('#exampleModalEdit').modal('show');
+
+                // Pastikan handler submit hanya di-bind sekali
+                $('#formEdit').off('submit').on('submit', function(e) {
+                    e.preventDefault();
+                    var formData = $(this).serialize();
+                    console.log("Edit Form Data: ", formData); // Log form data
+
                     $.ajax({
-                        url: "{{ url('siswa') }}/" + id,
-                        method: "DELETE",
+                        url: "/siswa/" + id, // Gunakan URL relatif untuk memastikan
+                        method: "PUT",
+                        data: formData,
                         success: function(response) {
-                            console.log("Delete Server Response: ", response); // Log server response
+                            console.log("Edit Server Response: ", response); // Log server response
 
-                            $('#siswa-' + id).remove();
-                            updateRowNumbers();
+                            if (response && response.id) {
+                                $('#exampleModalEdit').modal('hide');
+                                // Update tampilan tabel
+                                $('#siswa-' + id).replaceWith(`
+                                    <tr id="siswa-${response.id}">
+                                        <td></td> <!-- Kolom nomor, akan diisi dengan updateRowNumbers -->
+                                        <td>${response.nis}</td>
+                                        <td>${response.nama}</td>
+                                        <td>${response.kelas.kelas} ${response.kelas.jurusan}</td>
+                                        <td>${response.no_telepon}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-success rounded ms-2 shadow-sm editBtn"
+                                                data-id="${response.id}" data-nis="${response.nis}" data-nama="${response.nama}"
+                                                data-kelas_id="${response.kelas_id}" data-no_telepon="${response.no_telepon}">
+                                                Edit
+                                            </button>
+                                            <button class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn"
+                                                data-id="${response.id}">
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                `);
+                                updateRowNumbers(); // Update nomor baris setelah perubahan
 
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Data siswa has been deleted.",
-                                icon: "success"
-                            });
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Data berhasil diubah!",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "Kesalahan!",
+                                    text: "Pastikan data sudah terisi semua."
+                                });
+                            }
                         },
                         error: function(xhr) {
-                            console.error("Delete Error Response: ", xhr); // Log error response
+                            console.error("Edit Error Response: ", xhr); // Log error response
                             Swal.fire({
-                                title: "Error!",
-                                text: "Failed to delete the record. Please try again.",
-                                icon: "error"
+                                title: "Kesalahan!",
+                                text: "Terjadi kesalahan saat mengubah data."
                             });
                         }
                     });
-                }
+                });
             });
-        });
 
-        // Initial update for row numbers
-        updateRowNumbers();
-    });
+            // Delete Siswa
+            $(document).on('click', '.deleteBtn', function() {
+                var id = $(this).data('id');
+
+                Swal.fire({
+                    title: "Apakah anda yakin?",
+                    text: "Ingin menghapus data siswa ini?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Ya, hapus!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ url('siswa') }}/" + id,
+                            method: "DELETE",
+                            success: function(response) {
+                                console.log("Delete Server Response: ", response); // Log server response
+
+                                $('#siswa-' + id).remove();
+                                updateRowNumbers();
+
+                                Swal.fire({
+                                    title: "Terhapus!",
+                                    text: "Data siswa telah dihapus.",
+                                    icon: "success"
+                                });
+                            },
+                            error: function(xhr) {
+                                console.error("Delete Error Response: ", xhr); // Log error response
+                                Swal.fire({
+                                    title: "Kesalahan!",
+                                    text: "Gagal menghapus data. Silakan coba lagi.",
+                                    icon: "error"
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Initial update for row numbers
+            updateRowNumbers();
+        });
     </script>
+
+
+
+
 
 
 
