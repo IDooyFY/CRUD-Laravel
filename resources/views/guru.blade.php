@@ -29,14 +29,6 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
-
-    <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -317,36 +309,10 @@
     <script src="assets/js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-
-    {{-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-                var editButtons = document.querySelectorAll('.btn-edit');
-                var modal = document.getElementById('exampleModalEdit');
-                var form = document.getElementById('formEdit');
-
-                editButtons.forEach(function (button) {
-                    button.addEventListener('click', function () {
-                        var id = this.getAttribute('data-id');
-                        var nama = this.getAttribute('data-nama');
-                        var no_induk = this.getAttribute('data-no_induk');
-                        var alamat = this.getAttribute('data-alamat');
-                        var no_telepon = this.getAttribute('data-no_telepon');
-
-                        form.action = `/guru/${id}`;
-                        modal.querySelector('#editNama').value = nama;
-                        modal.querySelector('#editNo_induk').value = no_induk;
-                        modal.querySelector('#editAlamat').value = alamat;
-                        modal.querySelector('#editNoTelepon').value = no_telepon;
-                    });
-                });
-            });
-    </script> --}}
-
     <script>
         function updateTableNumbers() {
             $('#guruTable tbody tr').each(function(index) {

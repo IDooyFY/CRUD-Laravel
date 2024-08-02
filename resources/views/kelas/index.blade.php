@@ -285,10 +285,10 @@
             $('#createKelasForm').on('submit', function(e) {
                 e.preventDefault();
                 $.ajax({
-                    type: "POST",
-                    url: "/kelas",
-                    data: $(this).serialize(),
-                    success: function(response) {
+                    type: "POST"
+                    , url: "/kelas"
+                    , data: $(this).serialize()
+                    , success: function(response) {
                         $('#createKelasModal').modal('hide');
                         $('#kelasTable tbody').append(
                             `<tr id="kelas-${response.id}">
@@ -305,17 +305,17 @@
                         );
                         updateTableNumbers();
                         Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: 'Data berhasil ditambahkan!'
+                            icon: 'success'
+                            , title: 'Success'
+                            , text: 'Data berhasil ditambahkan!'
                         });
-                    },
-                    error: function(error) {
+                    }
+                    , error: function(error) {
                         console.log(error);
                         Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Terjadi kesalahan!'
+                            icon: 'error'
+                            , title: 'Oops...'
+                            , text: 'Terjadi kesalahan!'
                         });
                     }
                 });
@@ -336,78 +336,78 @@
                 e.preventDefault();
                 let id = $('#editKelasId').val();
                 $.ajax({
-                    type: "PUT",
-                    url: "/kelas/" + id,
-                    data: $(this).serialize(),
-                    headers: {
+                    type: "PUT"
+                    , url: "/kelas/" + id
+                    , data: $(this).serialize()
+                    , headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
+                    }
+                    , success: function(response) {
                         $('#editKelasModal').modal('hide');
                         $(`#kelas-${response.id}`).html(
                             `<td></td>
-                            <td>${response.kelas}</td>
-                            <td>${response.jurusan}</td>
-                            <td>${response.siswa_count}</td>
-                            <td>
-                                <button class="btn btn-sm btn-success editBtn" data-id="${response.id}">Edit</button>
-                                <button type="button" class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn"
-                                    data-id="${response.id}">Delete</button>
-                            </td>`
+                <td>${response.kelas}</td>
+                <td>${response.jurusan}</td>
+                <td>${response.siswa_count}</td>
+                <td>
+                    <button class="btn btn-sm btn-success editBtn" data-id="${response.id}">Edit</button>
+                    <button type="button" class="btn btn-sm btn-danger rounded ms-2 shadow-sm deleteBtn" data-id="${response.id}">Delete</button>
+                </td>`
                         );
                         updateTableNumbers();
                         Swal.fire({
-                            icon: 'success',
-                            title: 'Success',
-                            text: 'Data berhasil diupdate!'
+                            icon: 'success'
+                            , title: 'Success'
+                            , text: 'Data berhasil diupdate!'
                         });
-                    },
-                    error: function(xhr) {
+                    }
+                    , error: function(xhr) {
                         console.log(xhr);
                         Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Terjadi kesalahan!'
+                            icon: 'error'
+                            , title: 'Oops...'
+                            , text: 'Terjadi kesalahan!'
                         });
                     }
                 });
             });
 
+
             // Delete Kelas
             $(document).on('click', '.deleteBtn', function() {
                 let id = $(this).data('id');
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    title: 'Are you sure?'
+                    , text: "You won't be able to revert this!"
+                    , icon: 'warning'
+                    , showCancelButton: true
+                    , confirmButtonColor: '#3085d6'
+                    , cancelButtonColor: '#d33'
+                    , confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            type: "DELETE",
-                            url: "/kelas/" + id,
-                            data: {
-                                "_token": $('meta[name="csrf-token"]').attr('content'),
-                            },
-                            success: function(response) {
+                            type: "DELETE"
+                            , url: "/kelas/" + id
+                            , data: {
+                                "_token": $('meta[name="csrf-token"]').attr('content')
+                            , }
+                            , success: function(response) {
                                 Swal.fire(
-                                    'Deleted!',
-                                    'Your data has been deleted.',
-                                    'success'
+                                    'Deleted!'
+                                    , 'Your data has been deleted.'
+                                    , 'success'
                                 ).then(() => {
                                     $(`#kelas-${id}`).remove();
                                     updateTableNumbers();
                                 });
-                            },
-                            error: function(error) {
+                            }
+                            , error: function(error) {
                                 console.log(error);
                                 Swal.fire({
-                                    icon: 'error',
-                                    title: 'Oops...',
-                                    text: 'Terjadi kesalahan!'
+                                    icon: 'error'
+                                    , title: 'Oops...'
+                                    , text: 'Terjadi kesalahan!'
                                 });
                             }
                         });
@@ -415,6 +415,7 @@
                 });
             });
         });
+
     </script>
 </body>
 

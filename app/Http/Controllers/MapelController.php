@@ -14,17 +14,15 @@ class MapelController extends Controller
      */
     public function index(Request $request)
     {
-
-        $search = $request->input('search');
-        $siswa = Siswa::all();
         $kelas = Kelas::all();
+        $siswa = Siswa::all();
+        $search = $request->get('search');
+        $mapel = Mapel::when($search, function ($query, $search) {
+            return $query->where('mapel', 'like', "%$search%")
+                         ->orWhere('keterangan', 'like', "%$search%");
+        })->paginate(10);
 
-    $mapel = Mapel::query()
-                ->where('mapel', 'LIKE', "%{$search}%")
-                ->orWhere('keterangan', 'LIKE', "%{$search}%")
-                ->get();
-
-    return view('mapel.index', compact('mapel', 'kelas', 'siswa'));
+        return view('mapel.index', compact('mapel', 'siswa', 'kelas'));
     }
 
     /**
@@ -32,9 +30,7 @@ class MapelController extends Controller
      */
     public function create(Request $request, Mapel $mapel)
     {
-
-        Mapel::create($request->all());
-        return redirect()->route('mapel.index')->with('success', 'Data mapel berhasil diperbarui.');
+        //
     }
 
     /**
@@ -42,7 +38,14 @@ class MapelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'mapel' => 'required|string|max:255',
+            'keterangan' => 'required|string|max:255',
+        ]);
+
+        $mapel = Mapel::create($validated);
+
+        return response()->json($mapel);
     }
 
     /**
@@ -50,43 +53,39 @@ class MapelController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $mapel = Mapel::findOrFail($id);
+        return view('mapel.show', compact('mapel'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Mapel $mapel)
     {
-        //
+        return response()->json($mapel);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Mapel $mapel)
     {
-        $request->validate([
-            'mapel' => 'required|string',
-            'keterangan' => 'string',
+        $validated = $request->validate([
+            'mapel' => 'required|string|max:255',
+            'keterangan' => 'required|string|max:255',
         ]);
 
-        $mapel = Mapel::findOrFail($id);
-        $mapel->mapel = $request->input('mapel');
-        $mapel->keterangan = $request->input('keterangan');
-        $mapel->save();
+        $mapel->update($validated);
 
-        return redirect()->route('mapel.index')->with('success', 'Mapel berhasil diperbarui');
+        return response()->json($mapel);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Mapel $mapel)
     {
-        $mapel = Mapel::findOrFail($id);
         $mapel->delete();
-
-        return redirect()->route('mapel.index')->with('success', 'Mapel berhasil dihapus');
+        return response()->json(['success' => true]);
     }
 }

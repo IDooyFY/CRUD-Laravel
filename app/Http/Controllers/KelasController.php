@@ -107,8 +107,10 @@ class KelasController extends Controller
     $jumlahSiswa = Siswa::where('kelas_id', $kelas->id)->count();
 
     return response()->json([
-        'kelas' => $kelas,
-        'jumlah_siswa' => $jumlahSiswa
+        'id' => $kelas->id,
+        'kelas' => $kelas->kelas,
+        'jurusan' => $kelas->jurusan,
+        'siswa_count' => $jumlahSiswa,
     ]);
 }
 
